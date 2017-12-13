@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^$', views.product_list, name='product_list'),
     url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
     url(r'^post/new/$', views.post_new, name='post_new'),
+    url(r'^aaa$', views.request_str, name='req_str')
     # url(r'^post/(?P<pk>[0-9]+)/$', DetailView.as_view(
     #     context_object_name="Product",
     #     model=Product,

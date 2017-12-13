@@ -6,15 +6,15 @@ from django.utils import timezone
 
 
 class Product(models.Model):
-    author = models.ForeignKey('auth.User')
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=255, help_text="Input title text")
     text = models.TextField()
     created_date = models.DateTimeField(
         default=timezone.now)
     published_date = models.DateTimeField(
         blank=True, null=True)
-    picture = models.ImageField(default=r"file////C:/Users/MSI-PNoryk/Desktop/site/NoPicAvailable.png",
-                                upload_to="images/%Y/%m/%d", verbose_name='Ссылка картинки')
+    picture = models.ImageField(default="images/NoPicAvailable.png",
+                                upload_to="images/%Y/%m/%d", verbose_name='Ссылка картинки',
+                                )
 
     def publish(self):
         self.published_date = timezone.now()
