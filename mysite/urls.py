@@ -16,9 +16,34 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib.staticfiles import views
+
+admin.autodiscover()
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'', include('hypermarket.urls')),
+                  url(r'^admin/', admin.site.urls),
+                  url(r'', include('hypermarket.urls')),
+                  url(r'', include('products.urls')),
+                  url(r'', include('orders.urls')),
+                  # ]
+              ] \
+              + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
+              + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-]
+# if settings.DEBUG:
+#     url(r'^static/(?P<path>.*)$', views.serve)
+
+
+# print(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
+# url(r'^admin/', admin.site.urls), sep="\n")
+
+
+# if settings.DEBUG:
+#     urlpatterns += patterns(
+#     'django.views.static',
+#     (r'media/(?P.*)',
+#     'serve',
+#     {'document_root': settings.MEDIA_ROOT}),
+# )

@@ -3,7 +3,8 @@
 __pycache__
 myvenv
 db.sqlite3
-hypermarket/static/media
+static/media
+static/static_prod
 .DS_Store
 HelpConsoleCommands
 .idea/

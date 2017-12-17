@@ -3,6 +3,7 @@ from django.utils import timezone
 
 
 # Create your models here.
+from django.utils.html import format_html
 
 
 class Product(models.Model):
@@ -13,8 +14,7 @@ class Product(models.Model):
     published_date = models.DateTimeField(
         blank=True, null=True)
     picture = models.ImageField(default="images/NoPicAvailable.png",
-                                upload_to="images/%Y/%m/%d", verbose_name='Ссылка картинки',
-                                )
+                                upload_to="images/%Y/%m/%d", verbose_name='Ссылка картинки')
 
     def publish(self):
         self.published_date = timezone.now()
@@ -23,5 +23,13 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
-    def img(self):
-        return self.picture.path
+    def image_img(self):
+        if self.picture:
+            return format_html(r'<a href="{0}" target="_blank"><img src="{0}" width="100"/></a>'.format(
+                self.picture.url))
+        else:
+            return '(Нет изображения)'
+
+    image_img.allow_tags = True
+    image_img.short_description = 'Картинка'
+

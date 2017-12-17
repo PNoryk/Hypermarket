@@ -14,7 +14,7 @@
         <h1>{{ post.title }}</h1>
         <p>"post Details"</p>
         {% if post.picture %}
-            <a href="{{post.picture.url}}"><img src={{ MEDIA_URL }}{{ post.picture.url }}></a>
+            <a href="{{post.picture.url}}" target="_blank"><img src={{ MEDIA_URL }}{{ post.picture.url }}></a>
         {% endif %}
 
         <p>{{ post.text }}</p>
