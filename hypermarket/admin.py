@@ -15,4 +15,4 @@ class ProductAdmin(admin.ModelAdmin):
     #     model = Product
 
 
-admin.site.register(Product, ProductAdmin)
+# admin.site.register(Product, ProductAdmin)

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="selection-top">
+        <img class="my-img" src={% static "media/images/slider0.jpg" %}>
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                {% for item in products_images %}
+                    <div class="col-lg-4">
+                        <div class="product-item">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" class="product-image-item">
+                            {% endif %}
+                            <h3>
+                                {{ item.product.name }}
+                            </h3>
+                            <h6>
+                                {{ item.product.price }} BYN
+                            </h6>
+                            {{ item.product.description|truncatechars:50 }}
+
+
+                            <div class="add-to-card-btn">
+                                <button class="btn btn-success">
+                                    Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

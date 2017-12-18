@@ -15,8 +15,10 @@
         <p>"post Details"</p>
         {% if post.picture %}
             <a href="{{post.picture.url}}" target="_blank"><img src={{ MEDIA_URL }}{{ post.picture.url }}></a>
+        {% else %}
+            <a href="{{ MEDIA_URL }}{{ "NoPictureAvailable.png" }}" target="_blank">
+                <img src="{{ MEDIA_URL }}{{ "NoPictureAvailable.png" }}"></a>
         {% endif %}
-
         <p>{{ post.text }}</p>
     </div>
 {% endblock %}

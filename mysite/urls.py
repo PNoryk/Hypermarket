@@ -27,6 +27,8 @@ urlpatterns = [
                   url(r'', include('hypermarket.urls')),
                   url(r'', include('products.urls')),
                   url(r'', include('orders.urls')),
+                  url(r'', include('landing.urls')),
+
                   # ]
               ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \

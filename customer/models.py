@@ -21,11 +21,11 @@ class Customer(models.Model):
         return "Customer: {}".format(self.name)
 
     def image_img(self):
-        if self.avatar:
-            return format_html(r'<a href="{0}" target="_blank"><img src="{0}" width="75"/></a>'.format(
+        if self.avatar and self.avatar.isatty:
+            return format_html(r'<a href="{0}" target="_blank"><img src="{0}" width="50"/></a>'.format(
                 self.avatar.url))
         else:
-            return format_html(r'<a href="{0}" target="_blank"><img src="{0}" width="75"/></a>'.format(
+            return format_html(r'<a href="{0}" target="_blank"><img src="{0}" width="50"/></a>'.format(
                 MEDIA_URL + "images/NoPictureAvailable.png"))
 
     image_img.allow_tags = True
