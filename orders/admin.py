@@ -10,7 +10,7 @@ class StatusAdmin(admin.ModelAdmin):
         model = Status
 
 
-admin.site.register(Status, StatusAdmin)
+# admin.site.register(Status, StatusAdmin)
 
 
 class ProductInOrderInline(admin.TabularInline):
@@ -39,4 +39,4 @@ class ProductInOrderAdmin(admin.ModelAdmin):
         model = ProductInOrder
 
 
-admin.site.register(ProductInOrder, ProductInOrderAdmin)
+# admin.site.register(ProductInOrder, ProductInOrderAdmin)

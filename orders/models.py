@@ -7,10 +7,10 @@ from products.models import Product
 
 
 class Status(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, default="New")
 
     def __str__(self):
-        return "Status: {}".format(self.name)
+        return "{}".format(self.name)
 
     class Meta:
         verbose_name = 'Order status'
@@ -20,9 +20,11 @@ class Status(models.Model):
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
     comments = models.TextField(blank=True)
-    status = models.ForeignKey(Status, blank=True, on_delete=models.DO_NOTHING)
+    status = models.ForeignKey(Status, on_delete=models.DO_NOTHING)
     created = models.DateTimeField(auto_now_add=True)
-    order_total_price = models.DecimalField(max_digits=9, decimal_places=2)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    order_total_price = models.DecimalField(max_digits=9, decimal_places=2, default=0)
 
     def __str__(self):
         return "Order: {}, status: {}".format(self.id, self.status.name)
@@ -48,8 +50,8 @@ class ProductInOrder(models.Model):
         return "{}".format(self.product.name)
 
     class Meta:
-        verbose_name = 'Product'
-        verbose_name_plural = "Products"
+        verbose_name = 'Product in order'
+        verbose_name_plural = "Products in order"
 
     def save(self, *args, **kwargs):
         self.price_per_item = Product.objects.filter(name=self.product)[0].price

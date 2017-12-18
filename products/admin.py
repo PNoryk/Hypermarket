@@ -18,6 +18,7 @@ class ProductImageInline(admin.TabularInline):
     extra = 0
 
 
+# @admin.site.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['name', 'category', 'price']
     inlines = [ProductImageInline]
@@ -27,7 +28,10 @@ admin.site.register(Product, ProductAdmin)
 
 
 class ProductImageAdmin(admin.ModelAdmin):
-    list_display = ['product', 'image_img', 'created']
+    list_display = ['product', 'image_img', 'is_main', 'created']
+    # list_display = [field.name for field in ProductImage._meta.fields]
+    # fields = (('product', 'created'), 'is_main')
+    # exclude = ['created']
 
 
 admin.site.register(ProductImage, ProductImageAdmin)
