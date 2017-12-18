@@ -4,7 +4,7 @@ from orders.models import *
 
 # Register your models here.
 class StatusAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Status._meta.fields]
+    list_display = ['name']
 
     class Meta:
         model = Status
@@ -33,6 +33,7 @@ admin.site.register(Order, OrderAdmin)
 
 class ProductInOrderAdmin(admin.ModelAdmin):
     list_display = [field.name for field in ProductInOrder._meta.fields]
+    readonly_fields = ['price_per_item', 'product_total_price']
 
     class Meta:
         model = ProductInOrder
