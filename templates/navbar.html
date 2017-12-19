@@ -20,13 +20,25 @@
             <li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>
-        </ul>
-        <ul class="navbar-nav mr-right">
             <li class="nav-item">
                 <div class="basket-container">
-                    <a class="nav-link active" href="/" id="basket">Корзина <span class="sr-only">(current)</span></a>
+                    <a class="nav-link active" href="" id="basket">Basket <span id="basket_total_count">
+                        {% if basket_products_total_count %}
+                            ({{ basket_products_total_count }})
+                        {% else %}
+                            (0)
+                        {% endif %}
+                    </span>
+                    </a>
                     <div class="basket-items d-none">
                         <ul class="">
+                            {% for product_in_basket in products_in_basket %}
+                                <li>{{ product_in_basket.product.name }}, count: {{ product_in_basket.count }}, total
+                                    cost: {{ product_in_basket.product_total_price }}
+                                    <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">
+                                        x</a></li>
+                            {% endfor %}
+
                         </ul>
                     </div>
                 </div>

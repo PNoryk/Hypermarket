@@ -68,13 +68,13 @@
                     </div>
                     <div>
                         <form id="form_buying_product" class="form-inline"
-                              action="{% url 'basket_adding' %}">{% csrf_token %}
+                              action="{% url "basket_adding" %}">{% csrf_token %}
                             <input type="number" class="form-control" name="number" id="number">
                             <button type="submit" id="submit_btn" class="btn btn-success bnt-buy"
                                     data-product_id="{{ product.id }}"
                                     data-product_name="{{ product.name }}"
                                     data-product_price="{{ product.price }}"
-
+                                    data-product_discount="{{ product.discount }}"
                             >
                                 Купить
                             </button>

@@ -7,6 +7,5 @@ from products.views import product
 urlpatterns = [
     # url(r'^$', landing, name='landing.html'),
     url(r'^$', home, name='base.html'),
-    url(r'^product/(?P<product_id>\d+)$', product, name='product.html'),
 
 ]

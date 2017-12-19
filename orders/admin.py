@@ -40,3 +40,14 @@ class ProductInOrderAdmin(admin.ModelAdmin):
 
 
 # admin.site.register(ProductInOrder, ProductInOrderAdmin)
+
+
+class ProductInBasketAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in ProductInBasket._meta.fields]
+    readonly_fields = ['price_per_item', 'product_total_price']
+
+    class Meta:
+        model = ProductInBasket
+
+
+admin.site.register(ProductInBasket, ProductInBasketAdmin)

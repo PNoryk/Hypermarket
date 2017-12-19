@@ -2,7 +2,7 @@
     <div class="product-item">
         <div class="my-img">
             {% if item.image %}
-                <a href="{% url 'product.html' item.product.id %}">
+                <a href="{% url 'product' item.product.id %}">
                     <img src="{{ item.image.url }}" class="img-responsive">
                 </a>
             {% endif %}

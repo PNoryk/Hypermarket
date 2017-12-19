@@ -5,6 +5,7 @@ from django.dispatch import receiver
 
 from customer.models import Customer
 from products.models import Product
+from products.views import product
 
 
 class Status(models.Model):
@@ -60,9 +61,7 @@ class ProductInOrder(models.Model):
         verbose_name_plural = "Products in order"
 
     def save(self, *args, **kwargs):
-        prod = Product.objects.filter(name=self.product)[0]
-        # a = models.DecimalField(round(prod.price - prod.discount / 100 * prod.price), 2)
-        # self.price_per_item = (prod.price * 0.01)
+        prod = Product.objects.filter(id=self.product.id)[0]
         self.price_per_item = prod.price - prod.discount / Decimal(100) * prod.price
         # self.product_per_item = Decimal(self.product.price * 0.01).quantize(Decimal("1.00"))
         self.product_total_price = self.count * self.price_per_item
@@ -80,3 +79,28 @@ def product_in_order_post_save(instance, **kwargs):
 
     order.order_total_price = order_total_price
     order.save(force_update=True)
+
+
+class ProductInBasket(models.Model):
+    session_key = models.CharField(max_length=128, blank=True, null=True, default=None)
+    order = models.ForeignKey(Order, on_delete=models.DO_NOTHING, blank=True, null=True, default=None)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    count = models.IntegerField(default=1)
+    price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    product_total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0,
+                                              verbose_name='total price')  # price*nmb
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    updated = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return "{}".format(self.product.name)
+
+    class Meta:
+        verbose_name = 'Product in basket'
+        verbose_name_plural = "Products in Basket"
+
+    def save(self, *args, **kwargs):
+        prod = Product.objects.filter(id=self.product.id)[0]
+        self.price_per_item = prod.price - prod.discount / Decimal(100) * prod.price
+        self.product_total_price = int(self.count) * self.price_per_item
+        super(ProductInBasket, self).save(*args, **kwargs)
