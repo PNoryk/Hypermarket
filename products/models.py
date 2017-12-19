@@ -3,7 +3,7 @@ from django.utils.html import format_html
 
 
 class ProductCategory(models.Model):
-    name = models.CharField(max_length=64, blank=True, null=True, default=None)
+    name = models.CharField(max_length=64, default="New")
     is_active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -17,8 +17,9 @@ class ProductCategory(models.Model):
 class Product(models.Model):
     name = models.CharField(max_length=128)
     description = models.TextField(blank=True)
-    category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING, blank=True, null=True, default=None)
+    category = models.ForeignKey(ProductCategory, on_delete=models.DO_NOTHING, default="New")
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    discount = models.IntegerField(default=0)
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

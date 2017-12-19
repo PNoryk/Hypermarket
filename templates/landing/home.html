@@ -5,31 +5,46 @@
     <div class="selection-top">
         <img class="my-img" src={% static "media/images/slider0.jpg" %}>
     </div>
-    <div class="section">
+    <div class="section section1">
         <div class="container">
             <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        Новые поступления
+                    </h1>
+                </div>
                 {% for item in products_images %}
-                    <div class="col-lg-4">
-                        <div class="product-item">
-                            {% if item.image %}
-                                <img src="{{ item.image.url }}" class="product-image-item">
-                            {% endif %}
-                            <h3>
-                                {{ item.product.name }}
-                            </h3>
-                            <h6>
-                                {{ item.product.price }} BYN
-                            </h6>
-                            {{ item.product.description|truncatechars:50 }}
+                    {% include 'landing/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
+    <div class="section section2 hleb-category-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        товыры категории Хлеб
+                    </h1>
+                </div>
+                {% for item in products_images_hleb %}
+                    {% include 'landing/product_item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
-                            <div class="add-to-card-btn">
-                                <button class="btn btn-success">
-                                    Добавить в корзину
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+    <div class="section section2 test-category-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text-center">
+                        товыры категории текст
+                    </h1>
+                </div>
+                {% for item in products_images_test %}
+                    {% include "landing/product_item.html" %}
                 {% endfor %}
             </div>
         </div>
