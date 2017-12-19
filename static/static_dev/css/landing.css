@@ -1,0 +1,41 @@
+html, body{
+    height: 100%;
+    max-height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.top-container{
+    padding-top: 10%;
+}
+
+.general-container{
+    background: url('../../media/images/landing.jpg');
+    height: 100%;
+}
+
+.general-container form{
+    margin-top: 30px;
+}
+
+.general-container form label{
+    font-weight: bold;
+    font-size: medium;
+    color: #e8643e;
+}
+
+.btn-orange{
+    background-color: #e8643e;
+    border: none;
+}
+
+.btn-orange:hover{
+    background-color: #dc5129;
+    border: none;
+}
+
+.title{
+    text-align: center;
+    color: #e8643e;
+    font-weight: normal;
+    line-height: 50px;
+}

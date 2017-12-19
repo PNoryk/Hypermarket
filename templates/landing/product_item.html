@@ -1,0 +1,30 @@
+<div class="col-lg-4">
+    <div class="product-item">
+        <div class="my-img">
+            {% if item.image %}
+                <a href="{% url 'product.html' item.product.id %}">
+                    <img src="{{ item.image.url }}" class="img-responsive">
+                </a>
+            {% endif %}
+        </div>
+        <div class="discount">
+            {% if item.product.discount > 0 %}
+                <span>discount: {{ item.product.discount }}%</span>
+            {% endif %}
+        </div>
+        <h3>
+            {{ item.product.name }}
+        </h3>
+        <h6>
+            {{ item.product.price }} BYN
+        </h6>
+        {{ item.product.description|truncatechars:50 }}
+
+
+        <div class="add-to-card-btn">
+            <button class="btn btn-success">
+                Добавить в корзину
+            </button>
+        </div>
+    </div>
+</div>
