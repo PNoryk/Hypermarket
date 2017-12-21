@@ -1,5 +1,7 @@
-from django.shortcuts import render
 from django.http import JsonResponse
+from django.shortcuts import render
+
+from products.models import ProductImage
 from .models import *
 
 
@@ -42,3 +44,15 @@ def basket_adding(request):
         return_dict["products"].append(product_dict)
 
     return JsonResponse(return_dict)
+
+
+def basket(request):
+    session_key = request.session.session_key
+
+    prod_with_picture = dict()
+    products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
+    products_images = ProductImage.objects.filter(is_main=True)
+    for i in range(len(products_in_basket)):
+        prod_with_picture = {products_in_basket[i].product.name: products_images[i].image}
+
+    return render(request, 'orders/basket.html', locals())

@@ -1,11 +1,11 @@
+from decimal import *
+
 from django.db import models
 from django.db.models.signals import post_save
-from decimal import *
 from django.dispatch import receiver
 
 from customer.models import Customer
 from products.models import Product
-from products.views import product
 
 
 class Status(models.Model):
@@ -63,7 +63,6 @@ class ProductInOrder(models.Model):
     def save(self, *args, **kwargs):
         prod = Product.objects.filter(id=self.product.id)[0]
         self.price_per_item = prod.price - prod.discount / Decimal(100) * prod.price
-        # self.product_per_item = Decimal(self.product.price * 0.01).quantize(Decimal("1.00"))
         self.product_total_price = self.count * self.price_per_item
         super(ProductInOrder, self).save(*args, **kwargs)
 

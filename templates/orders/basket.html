@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3 class="text-center">Products in basket</h3>
+                <h5 class="text-center">Total cost: {{ request.session.basket.total_cost }} BYN </h5>
+                {{ request.session.basket.products }}
+                <form id="myFormId">
+                    <table class="table text-center">
+                        <thead>
+                        <tr>
+                            <td>
+                                Name
+                            </td>
+                            <td>
+                                Count
+                            </td>
+                            <td>
+                                Price per item
+                            </td>
+                            <td>
+                                Total price
+                            </td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for product_in_basket in products_in_basket %}
+                            <tr>
+                                <td>
+                                    {{ product_in_basket.product.name }}
+                                </td>
+                                {#                                <td>#}
+                                {#                                    {% if prod_with_picture.get()({{ product_in_basket.product.name }})   %}#}
+                                {##}
+                                {#                                    {% endif %}#}
+                                {#                                </td>#}
+                                <td>
+                                    <input value="{{ product_in_basket.count }}" type="number"
+                                           class="product-in-basket-count" id="product_in_basket_count"
+                                           data-producct_id="{{ product_in_basket.id }}">
+                                </td>
+                                <td>
+                                    <span class="product-in-basket-price" id="product_in_basket_price_per_item">
+                                        {{ product_in_basket.price_per_item }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="product-in-basket-total-price">
+                                        {{ product_in_basket.product_total_price }}
+                                    </span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="text-right">
+                        <b>Сумма заказа</b> <span id="total_order_amount"></span>
+
+                    </div>
+                    <hr>
+
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary btn-lg "> Заказать</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
