@@ -19,15 +19,29 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles import views
+from django.contrib.auth.views import LoginView, LogoutView
+# from customer.views import LogoutView
+from django.urls import path, reverse_lazy
+
+from customer.views import RegisterView
+from customer import views
 
 admin.autodiscover()
 
 urlpatterns = [
                   url(r'^admin/', admin.site.urls),
-                  url(r'', include('hypermarket.urls')),
+                  # url(r'', include('hypermarket.urls')),
                   url(r'', include('products.urls')),
                   url(r'', include('orders.urls')),
                   url(r'', include('landing.urls')),
+                  url(r'', include('customer.urls')),
+                  path('login', LoginView.as_view(
+                      template_name='myreg/login.html',
+                  ), name='login'),
+                  path('logout', views.logout_view, name='logout'),
+                  path('registration', RegisterView.as_view(
+                      template_name='myreg/registration.html',
+                  ), name='registration'),
 
                   # ]
               ] \

@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.urls import reverse
 
 from products.models import ProductImage
 from .models import *
@@ -49,10 +50,28 @@ def basket_adding(request):
 def basket(request):
     session_key = request.session.session_key
 
-    prod_with_picture = dict()
+    # prod_with_picture = dict()
     products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
     products_images = ProductImage.objects.filter(is_main=True)
-    for i in range(len(products_in_basket)):
-        prod_with_picture = {products_in_basket[i].product.name: products_images[i].image}
+    # for i in range(len(products_in_basket)):
+    #     prod_with_picture = {products_in_basket[i].product.name: products_images[i].image}
+
+    total = 0
+    for product in products_in_basket:
+        total += product.product_total_price
+
+    print(request.method)
+    if request.method == "POST":
+        products_in_basket = ProductInBasket.objects.filter(session_key=session_key)
+
+        for product in products_in_basket:
+            product.delete()
+        products_in_basket = None
+        total = 0
 
     return render(request, 'orders/basket.html', locals())
+
+
+
+
+

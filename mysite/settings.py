@@ -44,7 +44,10 @@ INSTALLED_APPS = [
     'orders',
     'customer',
     'landing',
+    # 'customer',
 ]
+
+LOGIN_REDIRECT_URL = 'base.html'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

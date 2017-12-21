@@ -1,7 +1,7 @@
 <!-- Static navbar -->
-<nav class="navbar navbar-expand-md navbar-top navbar-dark  bg-light ">
-    <a class="nav-link active" href="">Home<span class="sr-only">(current)</span></a>
-</nav>
+{#<nav class="navbar navbar-expand-md navbar-top navbar-dark  bg-light ">#}
+{#    <a class="nav-link active" href="">Home<span class="sr-only">(current)</span></a>#}
+{#</nav>#}
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
     <a class="navbar-brand">TSHOP</a>
@@ -21,28 +21,50 @@
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>
             <li class="nav-item">
-                <div class="basket-container">
-                    <a class="nav-link active" href="orders/basket.html" id="basket">Basket <span id="basket_total_count">
+                {% if user.is_authenticated %}
+                    <div class="basket-container">
+                        <a class="nav-link active" href=" {% url 'basket' %} " id="basket">Basket <span
+                                id="basket_total_count">
                         {% if basket_products_total_count %}
                             ({{ basket_products_total_count }})
                         {% else %}
                             (0)
                         {% endif %}
                     </span>
-                    </a>
-                    <div class="basket-items d-none">
-                        <ul class="">
-                            {% for product_in_basket in products_in_basket %}
-                                <li>{{ product_in_basket.product.name }}, count: {{ product_in_basket.count }}, total
-                                    cost: {{ product_in_basket.product_total_price }}
-                                    <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">
-                                        x</a></li>
-                            {% endfor %}
+                        </a>
+                        <div class="basket-items d-none">
+                            <ul class="">
+                                {% for product_in_basket in products_in_basket %}
+                                    <li>{{ product_in_basket.product.name }}, count: {{ product_in_basket.count }},
+                                        total
+                                        cost: {{ product_in_basket.product_total_price }}
+                                        <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">
+                                            x</a></li>
+                                {% endfor %}
 
-                        </ul>
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             </li>
+        </ul>
+        <ul class="navbar-nav mr-right">
+            {% if not user.is_authenticated %}
+                <li class="nav_item">
+                    <a class="nav-link active" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav_item">
+                    <a class="nav-link active" href="{% url 'registration' %}">Registration</a>
+
+                </li>
+
+            {% else %}
+                <li class="nav_item">
+
+                    <a class="nav-link active" href="{% url 'logout' %}">Logout</a>
+                </li>
+            {% endif %}
+
         </ul>
         {#        <form class="form-inline mt-2 mt-md-0">#}
         {#            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">#}

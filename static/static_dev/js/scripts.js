@@ -54,8 +54,7 @@ $(document).ready(function () {
         $('.basket-items').toggleClass('d-none');
     }
 
-    $('#basket').on('click', function (e) {
-        e.preventDefault();
+    $('#basket').mouseover(function () {
         showingBasket();
     });
 
@@ -84,13 +83,13 @@ $(document).ready(function () {
 
     }
 
-    $('#myFormId').ajaxForm(function () {
+    // $('#myFormId').ajaxForm(function () {
+    //
+    //     alert("Thank you for your comment!");
+    // });
 
-        alert("Thank you for your comment!");
-    });
+    // calculateBasketAmount();
 
-    calculateBasketAmount();
-
-    $('#product_in_basket_count').mousedown(calculateBasketAmount())
+    // $('#product_in_basket_count').mousedown(calculateBasketAmount())
 
 });
