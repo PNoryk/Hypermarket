@@ -13,18 +13,13 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
-from django.contrib import admin
-
 from django.conf import settings
+from django.conf.urls import url, include
 from django.conf.urls.static import static
-from django.contrib.staticfiles import views
-from django.contrib.auth.views import LoginView, LogoutView
-# from customer.views import LogoutView
-from django.urls import path, reverse_lazy
+from django.contrib import admin
+from django.urls import path
 
-from customer.views import RegisterView
-from customer import views
+import authorisation.views as views
 
 admin.autodiscover()
 
@@ -35,11 +30,10 @@ urlpatterns = [
                   url(r'', include('orders.urls')),
                   url(r'', include('landing.urls')),
                   url(r'', include('customer.urls')),
-                  path('login', LoginView.as_view(
-                      template_name='myreg/login.html',
-                  ), name='login'),
+                  path('login', views.MyLoginView.as_view(
+                      template_name='myreg/login.html'), name='login'),
                   path('logout', views.logout_view, name='logout'),
-                  path('registration', RegisterView.as_view(
+                  path('registration', views.RegisterView.as_view(
                       template_name='myreg/registration.html',
                   ), name='registration'),
 
@@ -48,18 +42,3 @@ urlpatterns = [
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# if settings.DEBUG:
-#     url(r'^static/(?P<path>.*)$', views.serve)
-
-
-# print(static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
-# url(r'^admin/', admin.site.urls), sep="\n")
-
-
-# if settings.DEBUG:
-#     urlpatterns += patterns(
-#     'django.views.static',
-#     (r'media/(?P.*)',
-#     'serve',
-#     {'document_root': settings.MEDIA_ROOT}),
-# )

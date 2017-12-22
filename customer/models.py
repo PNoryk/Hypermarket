@@ -1,3 +1,4 @@
+from django.core.validators import validate_slug
 from django.db import models
 from mysite.settings import MEDIA_URL
 
@@ -7,15 +8,15 @@ from imagekit.processors import ResizeToFit, Adjust,ResizeToFill
 
 
 class Customer(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, validators=[validate_slug])
     phone = models.DecimalField(max_digits=9, decimal_places=0)
     address = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     avatar = models.ImageField(upload_to="images/avatars/%Y/%m/%d", blank=True)
-    avatar_thumbnail = ImageSpecField(source='avatar',
-                                      processors=[ResizeToFill(50, 50)],
-                                      format='JPEG',
-                                      options={'quality': 60})
+    # avatar_thumbnail = ImageSpecField(source='avatar',
+    #                                   processors=[ResizeToFill(50, 50)],
+    #                                   format='JPEG',
+    #                                   options={'quality': 60})
 
     def __str__(self):
         return "Customer: {}".format(self.name)
@@ -34,3 +35,4 @@ class Customer(models.Model):
     # class Meta:
     #     verbose_name = 'Customer'
     #     verbose_name_plural = "Customers"
+

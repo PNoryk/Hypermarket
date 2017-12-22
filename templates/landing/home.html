@@ -20,34 +20,43 @@
         </div>
     </div>
 
-    <div class="section section2 hleb-category-container">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="text-center">
-                        товыры категории Хлеб
-                    </h1>
-                </div>
-                {% for item in products_images_hleb %}
-                    {% include 'landing/product_item.html' %}
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="container text-center" style="margin-top: 10%">
+            <select name="select-category">
 
-    <div class="section section2 test-category-container">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="text-center">
-                        товыры категории текст
-                    </h1>
-                </div>
-                {% for item in products_images_test %}
-                    {% include "landing/product_item.html" %}
+                <option value="default">Выбери категорию</option>
+                {% for product in product_categories %}
+                    <option>{{ product.name }}</option>
                 {% endfor %}
+            </select>
+
+            <button type="submit" class="btn btn-success">
+                Отфильтровать
+            </button>
+        </div>
+
+        <div class="col-lg-12">
+            <h1 class="text-center">
+                Товыры категории {{ category }}
+            </h1>
+        </div>
+
+        <div class="section section1">
+            <div class="container">
+                <div class="row">
+
+                    {% for item in selected_category_products %}
+
+                        {% include 'landing/product_item.html' %}
+
+
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
+    </form>
+
+
 
 {% endblock content %}
