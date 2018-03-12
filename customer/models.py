@@ -3,8 +3,8 @@ from django.db import models
 from mysite.settings import MEDIA_URL
 
 from django.utils.html import format_html
-from imagekit.models.fields import ImageSpecField
-from imagekit.processors import ResizeToFit, Adjust,ResizeToFill
+# from imagekit.models.fields import ImageSpecField
+# from imagekit.processors import ResizeToFit, Adjust,ResizeToFill
 
 
 class Customer(models.Model):

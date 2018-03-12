@@ -33,9 +33,8 @@ urlpatterns = [
                   path('login', views.MyLoginView.as_view(
                       template_name='myreg/login.html'), name='login'),
                   path('logout', views.logout_view, name='logout'),
-                  path('registration', views.RegisterView.as_view(
-                      template_name='myreg/registration.html',
-                  ), name='registration'),
+                  path('register', views.RegisterView.as_view(
+                      template_name='myreg/registration.html'), name='register'),
 
                   # ]
               ] \

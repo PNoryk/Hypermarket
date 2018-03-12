@@ -35,7 +35,6 @@ class LoginViewTest(TestCase):
 class LoginTest(TestCase):
 
     def setUp(self):
-        """ Подготовка к тестам: создание пользователя и клиента """
         self.data = {
             'name': 'Pavel',
             'phone': '293291555',
