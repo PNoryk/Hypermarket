@@ -17,27 +17,27 @@ from django.conf import settings
 from django.conf.urls import url, include
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+# from django.urls import path
+from django.contrib.auth.views import LogoutView
+from registration.views import RegistrationView
 
-import authorisation.views as views
+from authorisation.views import MyLoginView, MyRegistrationView, logout_view
 
 admin.autodiscover()
 
 urlpatterns = [
+                  url(r'admin/logout', logout_view, name='logout'),
                   url(r'^admin/', admin.site.urls),
                   # url(r'', include('hypermarket.urls')),
                   url(r'', include('products.urls')),
                   url(r'', include('orders.urls')),
                   url(r'', include('landing.urls')),
                   url(r'', include('customer.urls')),
-                  path('login', views.MyLoginView.as_view(
-                      template_name='myreg/login.html'), name='login'),
-                  path('logout', views.logout_view, name='logout'),
-                  path('register', views.RegisterView.as_view(
-                      template_name='myreg/registration.html'), name='register'),
-
-                  # ]
+                  url(r'login', MyLoginView.as_view(
+                      template_name='myAuth/login.html'), name='login'),
+                  url(r'logout', logout_view, name='logout'),
+                  url(r'registration', MyRegistrationView.as_view(
+                      template_name='myAuth/registration.html'), name='registration'),
               ] \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

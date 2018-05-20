@@ -5,7 +5,7 @@ from products.models import ProductImage, ProductCategory
 
 
 def landing(request):
-    return render(request, "landing/landing.html", locals())
+    return render(request, "landing/landing.html")
 
 
 def home(request):

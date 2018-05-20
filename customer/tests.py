@@ -16,7 +16,7 @@ class RegisterViewTest(TestCase):
     def test_page_template(self):
         """ Проверяет используется ли шаблон register.html """
         response = self.client.get('/registration')
-        self.assertTemplateUsed(response, 'myreg/registration.html')
+        self.assertTemplateUsed(response, 'myAuth/registration.html')
 
 
 class LoginViewTest(TestCase):
@@ -29,7 +29,7 @@ class LoginViewTest(TestCase):
     def test_page_template(self):
         """ Проверяет используется ли шаблон login.html """
         response = self.client.get('/login')
-        self.assertTemplateUsed(response, 'myreg/login.html')
+        self.assertTemplateUsed(response, 'myAuth/login.html')
 
 
 class LoginTest(TestCase):

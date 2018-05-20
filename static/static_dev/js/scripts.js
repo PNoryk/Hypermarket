@@ -22,7 +22,7 @@ $(document).ready(function () {
                 console.log(data);
                 console.log(data.products_total_number);
                 if (data.products_total_number || data.products_total_number == 0) {
-                    $('#basket_total_count').text("(" + data.products_total_number + ")")
+                    $('#basket_total_count').text("(" + data.products_total_number + ")");
                     $('.basket-items ul').html("");
                     $.each(data.products, function (k, v) {
                         $('.basket-items ul').append('<li>' + v.name + ', count: ' + v.count + '; ' +
@@ -58,14 +58,15 @@ $(document).ready(function () {
         showingBasket();
     });
 
-    // $('.basket-container').mouseover(function () {
-    //     showingBasket();
-    // });
 
-    //
-    // $('.basket-container').mouseout(function () {
-    //     showingBasket();
-    // });
+    $('.img-responsive').mouseover(function (e) {
+        e.target.style.height = "220px";
+    });
+
+    $('.img-responsive').mouseout(function (e) {
+        e.target.style.height = "200px";
+    });
+
 
     $(document).on('click', '.delete-item', function (e) {
         e.preventDefault();
@@ -79,17 +80,7 @@ $(document).ready(function () {
         $('.product-in-basket-total-price').each(function () {
             total_order_amount += parseInt($(this).text());
         });
-        $('#total_order_amount').text(total_order_amount)
+        $('#total_order_amount').text(total_order_amount);
 
     }
-
-    // $('#myFormId').ajaxForm(function () {
-    //
-    //     alert("Thank you for your comment!");
-    // });
-
-    // calculateBasketAmount();
-
-    // $('#product_in_basket_count').mousedown(calculateBasketAmount())
-
 });

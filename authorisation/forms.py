@@ -1,9 +1,9 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 
 from .validators import *
 
 
-class MyRegForm(UserCreationForm):
+class MyRegistrationForm(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data["username"]
 
@@ -37,3 +37,7 @@ class MyLoginForm(AuthenticationForm):
         pv.check_pass()
 
         return password
+
+
+class MuLogoutForm(UserChangeForm):
+    pass

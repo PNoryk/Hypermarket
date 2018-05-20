@@ -46,7 +46,7 @@ class Order(models.Model):
 class ProductInOrder(models.Model):
     order = models.ForeignKey(Order, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
-    count = models.IntegerField(default=1)
+    count = models.PositiveIntegerField(default=1)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     product_total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0,
                                               verbose_name='total price')  # price*nmb

@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static "static_dev/js/slick-master/slick/slick.css" %}">
+    <link rel="stylesheet" type="text/css" href={% static "static_dev/js/slick-master/slick/slick-theme.css" %}/>
+{% endblock styles %}
+
 {% block content %}
-    <div class="selection-top">
+    <div class="section-top">
         <img class="my-img" src={% static "media/images/slider0.jpg" %}>
     </div>
     <div class="section section1">
@@ -12,51 +18,77 @@
                     <h1 class="text-center">
                         Новые поступления
                     </h1>
+                    <section id="slider" class="regular slider">
+                        {% for item in products_images %}
+                            {% include 'landing/product_item.html' %}
+                        {% endfor %}
+
+                    </section>
                 </div>
-                {% for item in products_images %}
-                    {% include 'landing/product_item.html' %}
-                {% endfor %}
+
+
             </div>
         </div>
     </div>
 
-    <form method="post">
-        {% csrf_token %}
-        <div class="container text-center" style="margin-top: 10%">
-            <select name="select-category">
+    <div style="margin-top: 50px;">
+        <form method="post">
+            {% csrf_token %}
+            <div class="container text-center">
+                <label>
+                    <select name="select-category">
 
-                <option value="default">Выбери категорию</option>
-                {% for product in product_categories %}
-                    <option>{{ product.name }}</option>
-                {% endfor %}
-            </select>
+                        <option value="Хлеб">Выбери категорию</option>
+                        {% for product in product_categories %}
+                            <option>{{ product.name }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
 
-            <button type="submit" class="btn btn-success">
-                Отфильтровать
-            </button>
-        </div>
+                <button type="submit" class="btn btn-success">
+                    Отфильтровать
+                </button>
+            </div>
 
-        <div class="col-lg-12">
-            <h1 class="text-center">
-                Товыры категории {{ category }}
-            </h1>
-        </div>
+            <div class="col-lg-12">
+                <h1 class="text-center">
+                    Товыры категории {{ category }}
+                </h1>
+            </div>
 
-        <div class="section section1">
-            <div class="container">
-                <div class="row">
-
-                    {% for item in selected_category_products %}
-
-                        {% include 'landing/product_item.html' %}
-
-
-                    {% endfor %}
+            <div class="section section1">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <section id="slider1" class="regular slider">
+                                {% for item in selected_category_products %}
+                                    {% include 'landing/product_item.html' %}
+                                {% endfor %}
+                            </section>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </form>
-
-
+        </form>
+    </div>
 
 {% endblock content %}
+
+
+{% block scripts %}
+    <script src="{% static "static_dev/js/slick-master/slick/slick.min.js" %}"></script>
+    <script>
+        $("#slider").slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+        $("#slider1").slick({
+            dots: true,
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    </script>
+{% endblock scripts %}

@@ -14,7 +14,13 @@
                             <p><img src="{{ image_item.image.url }}." class="img-responsive"></p>
                         </div>
                     {% endfor %}
+                    {% if product.discount > 0 %}
+                        <div class="discount" style="left: 40%;">
+                            <span>discount: {{ product.discount }}%</span>
+                        </div>
+                    {% endif %}
                 </div>
+
             </div>
             <div class="col-lg-6">
                 <div class="section product-section">

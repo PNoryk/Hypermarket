@@ -1,17 +1,19 @@
-<div class="col-lg-4">
-    <div class="product-item">
-        <div class="my-img">
-            {% if item.image %}
-                <a href="{% url 'product' item.product.id %}">
-                    <img src="{{ item.image.url }}" class="img-responsive">
-                </a>
-            {% endif %}
+{#<div class="col-lg-4">#}
+<div class="product-item">
+    {% if item.image %}
+        <div class="my-img" id="{{ item.image }}">
+            <a href="{% url 'product' item.product.id %}">
+                <img src="{{ item.image.url }}" class="img-responsive" >
+            </a>
         </div>
+    {% endif %}
+
+    {% if item.product.discount > 0 %}
         <div class="discount">
-            {% if item.product.discount > 0 %}
-                <span>discount: {{ item.product.discount }}%</span>
-            {% endif %}
+            <span>discount: {{ item.product.discount }}%</span>
         </div>
+    {% endif %}
+    <div id="text-after">
         <h3>
             {{ item.product.name }}
         </h3>
@@ -19,12 +21,12 @@
             {{ item.product.price }} BYN
         </h6>
         {{ item.product.description|truncatechars:50 }}
-
-
-{#        <div class="add-to-card-btn">#}
-{#            <button class="btn btn-success">#}
-{#                Добавить в корзину#}
-{#            </button>#}
-{#        </div>#}
     </div>
+
+    {#        <div class="add-to-card-btn">#}
+    {#            <button class="btn btn-success">#}
+    {#                Добавить в корзину#}
+    {#            </button>#}
+    {#        </div>#}
 </div>
+{#</div>#}

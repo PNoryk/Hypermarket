@@ -3,7 +3,7 @@
 
 {% block content %}
     <div id="content-container" class="container p-none">
-        <div class="lgn-container col-lg-8">
+        <div class="lgn-container col-lg-10">
             <form id="login-form" method="post">
                 {% csrf_token %}
                 <table class="table">
@@ -21,13 +21,13 @@
 {#                {{ form.errors }}#}
                 {% for field in form %}
                     {% if field.errors %}
-                    <li>
-                        {{ field.name }} errors:
-                    </li>
-                    <ul class="errorlist">
+                        <li>
+                            {{ field.name }} errors:
+                        </li>
+                        <ul class="errorlist">
 
-                        {{ field.errors }}
-                    </ul>
+                            {{ field.errors }}
+                        </ul>
                     {% endif %}
                 {% endfor %}
 
