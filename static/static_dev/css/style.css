@@ -1,31 +1,32 @@
 html, body {
-    height: 50%;
-    max-height: 75%;
+    height: 100%;
     font-family: 'Philosopher', sans-serif;
     background-color: #edeef0;
     line-height: 1.15;
 }
-
-.navbar .navbar-brand {
-    color: white;
+body {
+    margin-top: 50px;
 }
 
-/*.wrapper {*/
-    /*height: 250px;*/
-/*}*/
+body {
+  -ms-overflow-style: scrollbar; }
 
-.wrapper-content {
-    overflow: auto;
-    /*padding-top: 3.5%;*/
-}
+*, *:before, *:after {
+  box-sizing: inherit; }
 
-.footer {
-    /*position: relative;*/
-    /*margin-top: -180px; !* negative value of footer height *!*/
-    /*height: 180px;*/
-    /*clear: both;*/
-    /*background-color: white;*/
-}
+html {
+  box-sizing: border-box; }
+
+body.is-preload *, body.is-preload *:before, body.is-preload *:after {
+    -moz-animation: none !important;
+    -webkit-animation: none !important;
+    -ms-animation: none !important;
+    animation: none !important;
+    -moz-transition: none !important;
+    -webkit-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important; }
+
 
 .section-top {
     margin-top: 50px;
@@ -155,7 +156,7 @@ html, body {
     padding: 15px;
     width: 50%;
     top: 50px;
-
+    display: none;
 }
 
 .lgn-container {
@@ -166,4 +167,91 @@ html, body {
 .footer-copyright {
     font-style: normal;
     line-height: 1.6;
+}
+
+
+
+/*login*/
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    text-align: center;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.my-alert {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 15px 29px 15px 15px;
+    background: #f8f8f8;
+    color: #666
+}
+.my-alert-danger {
+    color: #f0506e
+}
+.my-alert-close {
+    position: absolute;
+    top: 20px;
+    right: 15px;
+    color: inherit;
+    opacity: .4
+}
+
+.my-alert-close:first-child + * {
+    margin-top: 0
+}
+
+.my-alert-close:focus, .my-alert-close:hover {
+    color: inherit;
+    opacity: .8
+}
+/*end login*/
+
+
+/*grow image*/
+.grow {
+ -moz-transition: all 1s ease-out;
+ -o-transition: all 1s ease-out;
+ -webkit-transition: all 1s ease-out;
+ }
+
+.grow:hover {
+  -webkit-transform: scale(1.5);
+  -ms-transform: scale(1.5);
+  transform: scale(1.5);
+}
+
+/*.transition {*/
+    /*transition: 3s;*/
+/*}*/
+
+
+/*выравнивание в корзине крестиков по правому краю*/
+.delete-cross a{
+    color: white;
+}
+
+main {
+    padding-top: 50px;
 }

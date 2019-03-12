@@ -1,9 +1,8 @@
-{#<div class="col-lg-4">#}
 <div class="product-item">
     {% if item.image %}
         <div class="my-img" id="{{ item.image }}">
             <a href="{% url 'product' item.product.id %}">
-                <img src="{{ item.image.url }}" class="img-responsive" >
+                <img src="{{ item.image.url }}" class="img-responsive">
             </a>
         </div>
     {% endif %}
@@ -22,11 +21,4 @@
         </h6>
         {{ item.product.description|truncatechars:50 }}
     </div>
-
-    {#        <div class="add-to-card-btn">#}
-    {#            <button class="btn btn-success">#}
-    {#                Добавить в корзину#}
-    {#            </button>#}
-    {#        </div>#}
 </div>
-{#</div>#}

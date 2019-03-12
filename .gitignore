@@ -1,10 +1,7 @@
 *.pyc
 *~
 __pycache__
-new_venv
-db.sqlite3
-static/media
-static/static_prod
 .DS_Store
-HelpConsoleCommands
 .idea/
+pytest/
+sel/

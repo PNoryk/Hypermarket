@@ -51,3 +51,5 @@ class ProductImage(models.Model):
     class Meta:
         verbose_name = 'Product image'
         verbose_name_plural = "Product images"
+
+        ordering = ['-id']

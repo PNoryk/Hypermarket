@@ -11,7 +11,8 @@
 
                     {% for image_item in product.productimage_set.all %}
                         <div class="product-image-item">
-                            <p><img src="{{ image_item.image.url }}." class="img-responsive"></p>
+                            <img src="{{ image_item.image.url }}"
+                                 alt="No Image" class="img-responsive grow">
                         </div>
                     {% endfor %}
                     {% if product.discount > 0 %}
@@ -46,18 +47,6 @@
                                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#delivery" role="tab"
                                    aria-controls="profile">Delivery</a>
                             </li>
-                            {#                            <li class="nav-item dropdown">#}
-                            {#                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"#}
-                            {#                                   aria-haspopup="true" aria-expanded="false">#}
-                            {#                                    Dropdown#}
-                            {#                                </a>#}
-                            {#                                <div class="dropdown-menu">#}
-                            {#                                    <a class="dropdown-item" id="dropdown1-tab" href="#dropdown1" role="tab"#}
-                            {#                                       data-toggle="tab" aria-controls="dropdown1">@fat</a>#}
-                            {#                                    <a class="dropdown-item" id="dropdown2-tab" href="#dropdown2" role="tab"#}
-                            {#                                       data-toggle="tab" aria-controls="dropdown2">@mdo</a>#}
-                            {#                                </div>#}
-                            {#                            </li>#}
                         </ul>
 
                         <!-- Tab panes -->
@@ -68,14 +57,12 @@
                             <div class="tab-pane fade" id="delivery" role="tabpanel">
                                 Коротко о доставке
                             </div>
-                            {#                            <div class="tab-pane fade" id="messages" role="tabpanel">...</div>#}
-                            {#                            <div class="tab-pane fade" id="settings" role="tabpanel">...</div>#}
                         </div>
                     </div>
                     <div>
                         <form id="form_buying_product" class="form-inline"
                               action="{% url "basket_adding" %}">{% csrf_token %}
-                            <input type="number" class="form-control" name="number" id="number">
+                            <input type="number" class="form-control" name="number" id="number" value="1">
                             <button type="submit" id="submit_btn" class="btn btn-success bnt-buy"
                                     data-product_id="{{ product.id }}"
                                     data-product_name="{{ product.name }}"

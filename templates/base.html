@@ -1,11 +1,12 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TShop</title>
-
+    {% block title %}
+        <title>TShop</title>
+    {% endblock %}
     <link rel="shotcut icon" href="{% static 'media/images/favicon.png' %}">
 
     <!-- Bootstrap-->
@@ -17,16 +18,22 @@
     {% block styles %}
     {% endblock styles %}
 </head>
-<body>
-{#<div class="wrapper">#}
-    <div class="wrapper-content">
-        {% include 'navbar.html' %}
-        {% block content %}
-        {% endblock content %}
-    </div>
-    {% include 'footer.html' %}
+<body class="is-preload">
 
-{#</div>#}
+<header>
+    {% include 'navbar.html' %}
+</header>
+{% block banner %}
+{% endblock %}
+<main role="main" class="container">
+    {% block content %}
+    {% endblock content %}
+</main>
+
+<footer>
+    {% include 'footer.html' %}
+</footer>
+
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

@@ -3,8 +3,6 @@ from django.db import models
 from mysite.settings import MEDIA_URL
 
 from django.utils.html import format_html
-# from imagekit.models.fields import ImageSpecField
-# from imagekit.processors import ResizeToFit, Adjust,ResizeToFill
 
 
 class Customer(models.Model):
@@ -13,10 +11,6 @@ class Customer(models.Model):
     address = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     avatar = models.ImageField(upload_to="images/avatars/%Y/%m/%d", blank=True)
-    # avatar_thumbnail = ImageSpecField(source='avatar',
-    #                                   processors=[ResizeToFill(50, 50)],
-    #                                   format='JPEG',
-    #                                   options={'quality': 60})
 
     def __str__(self):
         return "Customer: {}".format(self.name)

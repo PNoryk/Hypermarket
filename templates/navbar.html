@@ -1,10 +1,5 @@
-<!-- Static navbar -->
-{#<nav class="navbar navbar-expand-md navbar-top navbar-dark  bg-light ">#}
-{#    <a class="nav-link active" href="">Home<span class="sr-only">(current)</span></a>#}
-{#</nav>#}
-
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark ">
-    <a class="navbar-brand" style="color: white">TSHOP</a>
+    <a class="navbar-brand" href="#">TSHOP</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
             aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,36 +7,42 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link active" href="/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link active" href="{% url "home" %}">Home <span class="sr-only">(current)</span></a>
             </li>
-{#            <li class="nav-item">#}
-{#                <a class="nav-link" href="#">Link</a>#}
-{#            </li>#}
-{#            <li class="nav-item">#}
-{#                <a class="nav-link disabled" href="#">Disabled</a>#}
-{#            </li>#}
             <li class="nav-item">
                 {% if user.is_authenticated %}
                     <div class="basket-container">
-                        <a class="nav-link active" href=" {% url 'basket' %} " id="basket">Basket <span
-                                id="basket_total_count">
-                        {% if basket_products_total_count %}
-                            ({{ basket_products_total_count }})
-                        {% else %}
-                            (0)
-                        {% endif %}
-                    </span>
+                        <a class="nav-link active" href=" {% url 'basket' %} " id="basket">
+                            Basket
+                            <span id="basket_total_count">
+                                {% if basket_products_total_count %}
+                                    ({{ basket_products_total_count }})
+                                {% else %}
+                                    (0)
+                                {% endif %}
+                            </span>
                         </a>
-                        <div class="basket-items d-none">
-                            <ul class="">
+                        <div class="basket-items">
+                            <div style="color: white;">
+                                {% if not products_in_basket %}
+                                    Basket is empty
+                                {% else %}
+                                    Items:
+                                {% endif %}
+                                <a id="close-basket" href="#" style="margin-left: 530px; color: white">
+                                    close (X)
+                                </a>
+                            </div>
+
+                            <ul>
                                 {% for product_in_basket in products_in_basket %}
                                     <li>{{ product_in_basket.product.name }}, count: {{ product_in_basket.count }},
                                         total
                                         cost: {{ product_in_basket.product_total_price }}
-                                        <a class="delete-item" href="" data-product_id="{{ product_in_basket.id }}">
+                                        <a class="delete-item delete-cross" style="color: white"
+                                           href="#" data-product_id="{{ product_in_basket.id }}">
                                             x</a></li>
                                 {% endfor %}
-
                             </ul>
                         </div>
                     </div>
@@ -55,16 +56,19 @@
                 </li>
                 <li class="nav_item">
                     <a class="nav-link active" href="{% url 'registration' %}">Registration</a>
-
                 </li>
-
             {% else %}
+                {% if user.is_staff %}
+                    <li class="nav-item active">
+                        <a href="{% url 'admin:index' %}" class="nav-link">
+                            Admin panel
+                        </a>
+                    </li>
+                {% endif %}
                 <li class="nav_item">
-
                     <a class="nav-link active" href="{% url 'logout' %}">Logout</a>
                 </li>
             {% endif %}
-
         </ul>
     </div>
 </nav>
